@@ -1,0 +1,34 @@
+{
+  "brand": "ROMEAR",
+  "colors": {
+    "forest": "#1F503A",
+    "cream": "#F7F4F1",
+    "terracotta": "#E07A5F",
+    "sand": "#E8DCCE",
+    "olive": "#8A9872",
+    "charcoal": "#282B2B"
+  },
+  "corner_dp": [
+    8,
+    12,
+    16,
+    24
+  ],
+  "spacing_dp": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32
+  ],
+  "minimum_touch_target_dp": 48,
+  "navigation": [
+    "Home",
+    "Explore",
+    "Create",
+    "Plans",
+    "Inbox"
+  ],
+  "profile_entry": "Top avatar"
+}

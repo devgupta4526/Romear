@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ROMEAR</string>
+    <string name="shell_title">Your city.\nA little closer.</string>
+    <string name="shell_body">A place for real people and shared experiences. Starting in Nagpur.</string>
+    <string name="shell_stage">The beginning</string>
+    <string name="connection_empty">This is the ROMEAR foundation. Social and planning features are not available yet.</string>
+    <string name="connection_checking">Checking the service…</string>
+    <string name="connection_ready">The service and database are ready. Community features are coming in later stages.</string>
+    <string name="connection_unavailable">The service is not ready. Please try again later.</string>
+    <string name="connection_offline">Could not reach the service. Check your connection and try again.</string>
+    <string name="check_connection">Check connection</string>
+</resources>

@@ -1,0 +1,7 @@
+Review ONLY the most recently implemented ROMEAR stage. Read AGENTS.md, specs/QUALITY_GATES.md and docs/BUILD_STATUS.md.
+
+1. Show what is genuinely implemented versus missing.
+2. Re-run relevant build commands, backend tests, database migrations, and Android assembly as available.
+3. Check navigation and key UI states; security/auth checks; actual API persistence; app restart; error and empty/offline cases.
+4. Fix every reproducible issue in THIS stage without introducing mock success states or starting the next stage.
+5. Clearly state whether the stage is COMPLETE, PARTIAL or BLOCKED, with precise evidence. Update docs/BUILD_STATUS.md accordingly.

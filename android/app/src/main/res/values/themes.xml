@@ -1,0 +1,15 @@
+<resources>
+    <style name="Theme.Romear" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/forest</item>
+        <item name="colorPrimaryVariant">@color/forest</item>
+        <item name="colorOnPrimary">@color/cream</item>
+        <item name="colorSecondary">@color/forest</item>
+        <item name="colorOnSecondary">@color/cream</item>
+        <item name="android:colorBackground">@color/cream</item>
+        <item name="colorSurface">@color/cream</item>
+        <item name="colorOnSurface">@color/charcoal</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/cream</item>
+    </style>
+</resources>

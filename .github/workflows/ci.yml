@@ -1,0 +1,51 @@
+name: Stage 00 quality
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  backend-web:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17.6-alpine
+        env:
+          POSTGRES_USER: romear_ci
+          POSTGRES_PASSWORD: isolated_ci_only
+          POSTGRES_DB: romear_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U romear_ci -d romear_test"
+          --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      ROMEAR_TEST_DATABASE_URL: postgresql+psycopg://romear_ci:isolated_ci_only@localhost:5432/romear_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: pip install -r backend/requirements.lock && pip install --no-deps -e backend
+      - run: python -m ruff check . && python -m ruff format --check . && python -m mypy app && python -m pytest -q
+        working-directory: backend
+      - run: python scripts/export_openapi.py
+        working-directory: backend
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: business-web/package-lock.json
+      - run: npm ci && npm run api:generate && npm run typecheck && npm test && npm run build
+        working-directory: business-web
+      - run: git diff --exit-code -- docs/openapi.json business-web/src/api/schema.d.ts
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+      - run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew :app:assembleDebug :app:assembleStaging :app:assembleRelease :app:testDebugUnitTest :app:lintDebug
+        working-directory: android

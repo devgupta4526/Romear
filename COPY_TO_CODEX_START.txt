@@ -1,0 +1,7 @@
+We are creating ROMEAR from scratch in THIS workspace.
+
+Read AGENTS.md, specs/DESIGN_SYSTEM.md, specs/USER_JOURNEYS.md, specs/QUALITY_GATES.md and design_reference/README.md.
+
+Implement ONLY the complete instructions in prompts/00_repository_bootstrap_delivery_discipline_and_local_development.md. Write real code and project files (Android Kotlin/XML, FastAPI/Postgres, React/TypeScript dashboard starter), not just a plan. No Firebase, no Compose, no fabricated successful backend operations.
+
+Run all checks feasible in this environment. Report exact commands/results, changed files, and blockers. Update docs/BUILD_STATUS.md. Stop after stage 00; do not implement stage 01 until I approve.
