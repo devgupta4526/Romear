@@ -2,6 +2,12 @@
 
 Status: accepted for Stage 00, 10 November 2026.
 
+Deployment addendum: the owner subsequently authorized Render hosting with a new
+Neon PostgreSQL project. The live API is https://romear-api.onrender.com/ and is now
+the default for all Android variants. This supersedes the original disabled-host
+and not-provisioned decisions below; local overrides remain supported. See
+DEPLOYMENT.md for actual resource IDs, settings and verification.
+
 ROMEAR begins as a monorepo: `android/`, `backend/`, `business-web/`. The supplied
 project contract and specifications remain authoritative. No prior prototype code
 or social seed data is imported.

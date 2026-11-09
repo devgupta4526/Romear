@@ -4,7 +4,8 @@ Device/emulator testing was explicitly delegated to the owner on 10 November 202
 No current-build emulator screenshot, visual approval, TalkBack pass or device test
 pass is claimed by Codex.
 
-1. Start/migrate the local API as in README.md. Confirm `/ready` returns HTTP 200.
+1. Confirm https://romear-api.onrender.com/ready returns HTTP 200. For local fault
+   testing, start/migrate a local API as in README.md and override DEV_API_URL.
 2. In `android/`, run `./gradlew.bat :app:assembleDebug`, then install the actual build:
 
    ```powershell
@@ -14,7 +15,9 @@ pass is claimed by Codex.
    adb shell am start -n app.romear.dev/app.romear.MainActivity
    ```
 
-   On the emulator the default API host is `10.0.2.2:8000`. For a USB device, use
+   All builds now default to `https://romear-api.onrender.com/`; no local server is
+   needed for the live check. For local fault testing, rebuild with
+   `-PDEV_API_URL=http://10.0.2.2:8000/`. For a USB device with a local backend, use
    `adb reverse tcp:8000 tcp:8000` and rebuild with
    `-PDEV_API_URL=http://127.0.0.1:8000/`.
 3. Confirm the cream/forest branded empty shell appears. No feed, accounts, bookings,

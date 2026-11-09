@@ -9,6 +9,10 @@ See [build evidence and blockers](docs/BUILD_STATUS.md), [architecture decision]
 Device validation is handed to the owner in [Android manual QA](docs/ANDROID_MANUAL_QA.md).
 The project contract is [AGENTS.md](AGENTS.md); implementation stops after prompt 00.
 
+Hosted backend: https://romear-api.onrender.com/ready, backed by Neon PostgreSQL.
+Android uses this service by default. Running a local backend is optional for app
+testing; the local instructions below are for backend development and fault testing.
+
 ## Requirements
 
 - Windows PowerShell 7 (commands below), Git, Python **3.14**, Node **24**, npm.
@@ -71,7 +75,9 @@ adb shell am start -n app.romear.dev/app.romear.MainActivity
 Open `android/` in Android Studio, select a device, and Run also works. The single
 `shellFragment` shows the branded empty state. **Check connection** calls the actual
 API `/ready`; it does not create content or pretend registration exists.
-Default emulator URL: `http://10.0.2.2:8000/`. For USB devices:
+All Android variants default to the deployed API: https://romear-api.onrender.com/.
+For a local emulator backend, rebuild with `-PDEV_API_URL=http://10.0.2.2:8000/`.
+For a local backend through USB:
 
 ```powershell
 adb reverse tcp:8000 tcp:8000
@@ -80,8 +86,8 @@ adb reverse tcp:8000 tcp:8000
 
 Variants: `assembleDebug` = dev, `assembleStaging` = staging, `assembleRelease` = prod.
 Override endpoints with `-PDEV_API_URL=.../`, `-PSTAGING_API_URL=https://.../`,
-`-PPROD_API_URL=https://.../`. Non-dev defaults intentionally use reserved `.invalid`
-domains; configure real HTTPS before deployment. No production signing credentials
+`-PPROD_API_URL=https://.../`. Defaults use the live Render API with Neon PostgreSQL.
+No production signing credentials
 are supplied; staging/release build validation produces unsigned artifacts.
 
 ## Business web

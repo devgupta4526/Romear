@@ -35,14 +35,14 @@ android {
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
             buildConfigField("String", "ENVIRONMENT", "\"dev\"")
-            buildConfigField("String", "API_BASE_URL", apiUrl("DEV_API_URL", "http://10.0.2.2:8000/"))
+            buildConfigField("String", "API_BASE_URL", apiUrl("DEV_API_URL", "https://romear-api.onrender.com/"))
             manifestPlaceholders["cleartextAllowed"] = "true"
         }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
             buildConfigField("String", "ENVIRONMENT", "\"prod\"")
-            buildConfigField("String", "API_BASE_URL", apiUrl("PROD_API_URL", "https://api.romear.invalid/"))
+            buildConfigField("String", "API_BASE_URL", apiUrl("PROD_API_URL", "https://romear-api.onrender.com/"))
             manifestPlaceholders["cleartextAllowed"] = "false"
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -52,7 +52,7 @@ android {
             versionNameSuffix = "-staging"
             matchingFallbacks += "release"
             buildConfigField("String", "ENVIRONMENT", "\"staging\"")
-            buildConfigField("String", "API_BASE_URL", apiUrl("STAGING_API_URL", "https://staging.romear.invalid/"))
+            buildConfigField("String", "API_BASE_URL", apiUrl("STAGING_API_URL", "https://romear-api.onrender.com/"))
         }
     }
     buildFeatures { viewBinding = true; buildConfig = true }

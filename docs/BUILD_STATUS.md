@@ -2,6 +2,35 @@
 
 Stage 00 implementation and verification, 10 November 2026 (Asia/Kolkata).
 
+## Render + Neon deployment follow-up
+
+Owner authorized My Workspace and a NEW ROMEAR Neon project. Render deployment
+`dep-dbp215jrjlhs73d650og` reached `live` against commit `9340fd9`. Public API:
+https://romear-api.onrender.com. Neon project `twilight-tree-62576717` uses PostgreSQL
+17 in Singapore; explicit Alembic upgrade/current passed (`0001_infrastructure`).
+Credentials were passed only to the migration process and Render service environment,
+not saved in source or Android. No fake or seeded domain records were introduced.
+
+Actual `Invoke-WebRequest` checks: `/health`, `/ready`, `/v1`, `/v1/openapi.json`
+returned HTTP 200; schema paths match `/health`, `/ready`, `/v1`. Production
+`/v1/docs` returned 404 as configured. Runtime logs showed successful startup.
+The MCP service creation defaults to TCP checks; Dashboard HTTP `/ready` configuration
+remains a production-launch follow-up. No local Docker or emulator claim is made.
+
+Changed files: android/app/build.gradle.kts (all three API defaults), README.md,
+docs/DEPLOYMENT.md, docs/ANDROID_MANUAL_QA.md, docs/ADR_001_FOUNDATION.md and this file.
+No XML layout, migration, API route or business feature changed. Emulator/device
+checks remain skipped at the owner's request. Android verification passed:
+`./gradlew.bat --no-daemon :app:assembleDebug :app:testDebugUnitTest :app:lintDebug :app:assembleStaging :app:assembleRelease`
+reported BUILD SUCCESSFUL in 6m 32s (169 tasks: 62 executed, 107 up-to-date).
+All 3 JVM tests passed; lint passed with 0 errors/30 warnings. Generated BuildConfig
+for debug, staging and release contains the live HTTPS URL and ALLOW_TEST_DATA=false.
+Backend code was unchanged, so the prior 13-test suite was not repeated for this
+configuration-only follow-up; real cloud DB migration and HTTP checks were run instead.
+
+The remaining sections record the original bootstrap verification. Their statements
+about unconfigured deployment and disabled API hosts are superseded by this follow-up.
+
 | Stage | Status | Verified checks | Issues/next action |
 |---|---|---|---|
 | 00 | PARTIAL — implementation and local build checks finished | Android debug/staging/release/test APK builds; 3 Android unit tests; lint 0 errors; backend lint/typecheck/13 tests including PostgreSQL; web typecheck/5 tests/build; live API readiness | Device testing delegated to owner; Docker engine unavailable; remote CI result unverified |
